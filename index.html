@@ -8,27 +8,33 @@
 <body>
     <h2>Upload a File and Get a Download Button</h2>
 
+    <!-- File input to upload a file -->
     <input type="file" id="fileInput" />
+
+    <!-- Container to display download buttons -->
     <div id="downloadButtonContainer"></div>
 
     <script>
-        // List of files uploaded (manually uploaded to GitHub repository)
-        const uploadedFiles = [
-            'file1.txt', // Replace with your actual file names
-            'file2.jpg'
-        ];
+        // Function to handle file upload and create a download button
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];  // Get the first file from the file input
+            if (file) {
+                createDownloadButton(file);  // Create a download button for the file
+            }
+        });
 
+        // Function to create a download button dynamically
         function createDownloadButton(file) {
             const downloadButtonContainer = document.getElementById('downloadButtonContainer');
             
-            // Create a URL for the file from the repository
-            const fileURL = `https://github.com/your-username/file-upload-download/raw/main/${file}`;
+            // Create a URL object for the file (this allows download without uploading it to a server)
+            const fileURL = URL.createObjectURL(file);
 
             // Create a download button
             const downloadButton = document.createElement('a');
-            downloadButton.href = fileURL;
-            downloadButton.download = file;
-            downloadButton.textContent = 'Download ' + file;
+            downloadButton.href = fileURL;  // Set the URL of the file for download
+            downloadButton.download = file.name;  // Set the filename as the download name
+            downloadButton.textContent = 'Download ' + file.name;  // Set button text to the file name
             downloadButton.style.display = 'inline-block';
             downloadButton.style.marginTop = '10px';
             downloadButton.style.padding = '10px';
@@ -40,9 +46,6 @@
             // Append the new download button to the container
             downloadButtonContainer.appendChild(downloadButton);
         }
-
-        // Automatically generate download buttons for each uploaded file
-        uploadedFiles.forEach(createDownloadButton);
     </script>
 </body>
 </html>
