@@ -6,7 +6,6 @@
     <title>Multiple File Upload and Download</title>
 </head>
 <body>
-    <!-- Updated heading text -->
     <h2>download mods made by minator 1000</h2>
 
     <!-- File input to upload multiple files -->
@@ -20,9 +19,6 @@
         document.getElementById('fileInput').addEventListener('change', function(event) {
             const files = event.target.files;  // Get the list of files selected by the user
             if (files.length > 0) {
-                // Clear previous download buttons before adding new ones
-                document.getElementById('downloadButtonContainer').innerHTML = '';
-                
                 // Loop through each file and create a download button
                 for (let i = 0; i < files.length; i++) {
                     createDownloadButton(files[i]);
