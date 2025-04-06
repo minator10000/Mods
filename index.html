@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>hmmm</title>
+  <title>Redirecting with Style</title>
   <style>
     body {
       font-family: 'Courier New', monospace;
       text-align: center;
-      background-color:  /* yellow */
+      background-color: #fff200; /* Bright yellow background */
       margin: 0;
       padding: 0;
+      overflow: hidden;
     }
 
     .container {
@@ -20,37 +21,35 @@
     }
 
     h1 {
-      color: #fff200;3;
+      color: #333;
+      margin-bottom: 10px;
     }
 
     .timer {
       font-size: 1.5rem;
       color: #333;
-      margin-top: 10px;
+      margin-bottom: 20px;
     }
 
-    .chicken {
-      width: 64px;
-      height: 64px;
+    .info {
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      color: #222;
+    }
+
+    .parrot {
+      width: 100px;
+      height: auto;
       position: absolute;
-      bottom: 40px;
-      left: -64px;
-      animation: walk 10s linear forwards;
-      z-index: 1;
+      bottom: 50px;
+      left: -100px;
+      animation: danceAcross 10s linear forwards;
     }
 
-    .chicken img {
-      width: 100%;
-      height: 100%;
-    }
-
-    @keyframes walk {
-      from {
-        left: -64px;
-      }
-      to {
-        left: 100%;
-      }
+    @keyframes danceAcross {
+      from { left: -100px; }
+      to { left: 100%; }
     }
 
     .ground {
@@ -58,7 +57,7 @@
       bottom: 0;
       width: 100%;
       height: 40px;
-      background: #228B22;
+      background-color: #228B22; /* grass/ground */
       z-index: 0;
     }
   </style>
@@ -70,33 +69,34 @@
         secondsLeft--;
         setTimeout(updateTimer, 1000);
       } else {
-        window.location.href = "https://drive.google.com/drive/folders/1AJYvsbmvEYQEnsYZ1QBCuGuqnl3bdqz4"; // <<-- put your redirect URL here
+        window.location.href = "https://drive.google.com/drive/folders/1AJYvsbmvEYQEnsYZ1QBCuGuqnl3bdqz4"; // ← CHANGE THIS
       }
     }
     window.onload = updateTimer;
   </script>
 </head>
 <body>
+
   <div class="container">
-    <h1> </h1>
+    <h1>website created my minator 1000</h1>
     <p class="timer">Redirecting in <span id="timer">10</span> seconds...</p>
 
-    <!-- Your extra info -->
-    <p>
-    i only make addons for my friends 
-      -by minator 1000
-    </p>
-    <p>
-      If you're not redirected automatically, <a href="https://drive.google.com/drive/folders/1AJYvsbmvEYQEnsYZ1QBCuGuqnl3bdqz4">click here</a>.
-    </p>
+    <div class="info">
+      <p>
+       i only make custom mods for my friends
+      </p>
+      <p>
+        If you're not redirected automatically, <a href="https://drive.google.com/drive/folders/1AJYvsbmvEYQEnsYZ1QBCuGuqnl3bdqz4">click here</a>.
+      </p>
+    </div>
   </div>
 
-  <!-- Chicken GIF animation -->
-  <div class="chicken">
-    <img src="https://tenor.com/en-GB/view/minecraft-parrot-gif-14679890" alt="Chicken gif" />
-    <!-- Replace 'funny-chicken.gif' with your actual gif path or URL -->
+  <!-- Dancing parrot GIF -->
+  <div class="parrot">
+    <img src="https://media.tenor.com/Fh8YzX7pDDUAAAAi/parrot-dance.gif" alt="Dancing Parrot" />
   </div>
 
   <div class="ground"></div>
+
 </body>
 </html>
