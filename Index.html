@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload and Download</title>
+</head>
+<body>
+    <h2>Upload a File and Get a Download Button</h2>
+
+    <input type="file" id="fileInput" />
+    <div id="downloadButtonContainer"></div>
+
+    <script>
+        // List of files uploaded (manually uploaded to GitHub repository)
+        const uploadedFiles = [
+            'file1.txt', // Replace with your actual file names
+            'file2.jpg'
+        ];
+
+        function createDownloadButton(file) {
+            const downloadButtonContainer = document.getElementById('downloadButtonContainer');
+            
+            // Create a URL for the file from the repository
+            const fileURL = `https://github.com/your-username/file-upload-download/raw/main/${file}`;
+
+            // Create a download button
+            const downloadButton = document.createElement('a');
+            downloadButton.href = fileURL;
+            downloadButton.download = file;
+            downloadButton.textContent = 'Download ' + file;
+            downloadButton.style.display = 'inline-block';
+            downloadButton.style.marginTop = '10px';
+            downloadButton.style.padding = '10px';
+            downloadButton.style.backgroundColor = '#4CAF50';
+            downloadButton.style.color = 'white';
+            downloadButton.style.textDecoration = 'none';
+            downloadButton.style.borderRadius = '5px';
+
+            // Append the new download button to the container
+            downloadButtonContainer.appendChild(downloadButton);
+        }
+
+        // Automatically generate download buttons for each uploaded file
+        uploadedFiles.forEach(createDownloadButton);
+    </script>
+</body>
+</html>
