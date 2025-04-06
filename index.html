@@ -3,27 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload and Download</title>
+    <title>Multiple File Upload and Download</title>
 </head>
 <body>
-    <h2>Upload a File and Get a Download Button</h2>
+    <!-- Updated heading text -->
+    <h2>Upload Multiple Files and Download Them</h2>
 
-    <!-- File input to upload a file -->
-    <input type="file" id="fileInput" />
+    <!-- File input to upload multiple files -->
+    <input type="file" id="fileInput" multiple />
 
     <!-- Container to display download buttons -->
     <div id="downloadButtonContainer"></div>
 
     <script>
-        // Function to handle file upload and create a download button
+        // Function to handle file upload and create download buttons for each file
         document.getElementById('fileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];  // Get the first file from the file input
-            if (file) {
-                createDownloadButton(file);  // Create a download button for the file
+            const files = event.target.files;  // Get the list of files selected by the user
+            if (files.length > 0) {
+                // Clear previous download buttons before adding new ones
+                document.getElementById('downloadButtonContainer').innerHTML = '';
+                
+                // Loop through each file and create a download button
+                for (let i = 0; i < files.length; i++) {
+                    createDownloadButton(files[i]);
+                }
             }
         });
 
-        // Function to create a download button dynamically
+        // Function to create a download button dynamically for each file
+        function createDownloadButton(file) {
+            const downloadButtonContainer = document.getElementById('downloadButtonContainer');
+            
+            // Create a URL object for the file (this allows download without uploading it to a server)
+            const fileURL = URL.createObjectURL(file);
+
+            // Create a download button
+            const downloadButton = document.createElement('a');
+            downloadButton.href = fileURL;  // Set the URL of the file for download
+            downloadButton.download = file.name;  // Set the filename as the download name
+            downloadButton.textContent = 'Download ' + file.name;  // Set button text to the file name
+            downloadButton.style.display = 'inline-block';
+            downloadButton.style.marginTop = '10px';
+            downloadButton.style.padding = '10px';
+            downloadButton.style.backgroundColor = '#4CAF50';
+            downloadButton.style.color = 'white';
+            downloadButton.style.textDecoration = 'none';
+            downloadButton.style.borderRadius = '5px';
+
+            // Append the new download button to the container
+            downloadButtonContainer.appendChild(downloadButton);
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>download mods created by minator1000</title>
+</head>
+<body>
+    <!-- Updated heading text -->
+    <h2>Upload Multiple Files and Download Them</h2>
+
+    <!-- File input to upload multiple files -->
+    <input type="file" id="fileInput" multiple />
+
+    <!-- Container to display download buttons -->
+    <div id="downloadButtonContainer"></div>
+
+    <script>
+        // Function to handle file upload and create download buttons for each file
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const files = event.target.files;  // Get the list of files selected by the user
+            if (files.length > 0) {
+                // Clear previous download buttons before adding new ones
+                document.getElementById('downloadButtonContainer').innerHTML = '';
+                
+                // Loop through each file and create a download button
+                for (let i = 0; i < files.length; i++) {
+                    createDownloadButton(files[i]);
+                }
+            }
+        });
+
+        // Function to create a download button dynamically for each file
         function createDownloadButton(file) {
             const downloadButtonContainer = document.getElementById('downloadButtonContainer');
             
