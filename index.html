@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Redirecting...</title>
+  <title>if you want your custom addons for minecraft bedroc my username in mcbe is minator 1000</title>
   <style>
     body {
       font-family: 'Courier New', monospace;
       text-align: center;
-      background-color: #fff200;
+      background-color: #fff200; /* yellow */
       margin: 0;
       padding: 0;
     }
@@ -32,12 +32,16 @@
     .chicken {
       width: 64px;
       height: 64px;
-      background:url('https://upload.wikimedia.org/wikipedia/en/5/5e/Minecraft_Chicken.png') no-repeat center/cover; 
       position: absolute;
       bottom: 40px;
       left: -64px;
       animation: walk 10s linear forwards;
       z-index: 1;
+    }
+
+    .chicken img {
+      width: 100%;
+      height: 100%;
     }
 
     @keyframes walk {
@@ -66,7 +70,7 @@
         secondsLeft--;
         setTimeout(updateTimer, 1000);
       } else {
-        window.location.href = "https://drive.google.com/drive/folders/1AJYvsbmvEYQEnsYZ1QBCuGuqnl3bdqz4?pli=1"; // Change to your redirect URL
+        window.location.href = "https://drive.google.com/drive/folders/1AJYvsbmvEYQEnsYZ1QBCuGuqnl3bdqz4"; // <<-- put your redirect URL here
       }
     }
     window.onload = updateTimer;
@@ -74,19 +78,24 @@
 </head>
 <body>
   <div class="container">
-    <h1>this website is only for minator 1000'followers and i only make custom mods for my friends</h1>
+    <h1> </h1>
     <p class="timer">Redirecting in <span id="timer">10</span> seconds...</p>
 
     <!-- Your extra info -->
     <p>
-    if you want your custom mods my username in minecraft is minator 1000
+    i only make addons for my friends 
     </p>
     <p>
-      If you're not redirected automatically, <a href="https://drive.google.com/drive/folders/1AJYvsbmvEYQEnsYZ1QBCuGuqnl3bdqz4?pli=1">click here</a>.
+      If you're not redirected automatically, <a href="https://drive.google.com/drive/folders/1AJYvsbmvEYQEnsYZ1QBCuGuqnl3bdqz4">click here</a>.
     </p>
   </div>
 
-  <div class="chicken"></div>
+  <!-- Chicken GIF animation -->
+  <div class="chicken">
+    <img src="funny-chicken.gif" alt="Chicken gif" />
+    <!-- Replace 'funny-chicken.gif' with your actual gif path or URL -->
+  </div>
+
   <div class="ground"></div>
 </body>
 </html>
