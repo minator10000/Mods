@@ -3,53 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mods by minator 1000</title>
+    <title>GitHub File Upload and Download</title>
 </head>
 <body>
-    <h2>download files made my minator 1000</h2>
-
-    <!-- File input to upload multiple files -->
-    <input type="file" id="fileInput" multiple />
-
+    <h2>mods by minator 1000</h2>
+    
     <!-- Container to display download buttons -->
     <div id="downloadButtonContainer"></div>
 
     <script>
-        // Check if there are saved files in localStorage when the page loads
-        window.onload = function() {
-            const storedFiles = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
-            storedFiles.forEach(file => {
-                createDownloadButton(file.name, file.url);
-            });
+        // GitHub repository details
+        const username = 'your-username';  // Replace with your GitHub username
+        const repo = 'your-repository';   // Replace with your repository name
+        const branch = 'main';            // Replace with your branch name (e.g., 'main')
+
+        // GitHub Personal Access Token (replace with your token)
+        const token = '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';  // Replace with your GitHub token
+
+        // GitHub API URL to get the list of files in the repository
+        const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/`;
+
+        // Function to fetch files from GitHub and create download buttons
+        async function fetchGitHubFiles() {
+            try {
+                // Add authorization header to the fetch request
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        'Authorization': `token ${token}`  // Include the token in the header
+                    }
+                });
+
+                // Parse the response as JSON
+                const files = await response.json();
+                const downloadButtonContainer = document.getElementById('downloadButtonContainer');
+
+                // Clear the previous content
+                downloadButtonContainer.innerHTML = '';
+
+                // Loop through the files and create download buttons for each one
+                files.forEach(file => {
+                    if (file.type === 'file') {  // Only create download buttons for actual files
+                        createDownloadButton(file.name, file.download_url);
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching files from GitHub:', error);
+            }
         }
 
-        // Function to handle file upload and create download buttons for each file
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            const files = event.target.files;  // Get the list of files selected by the user
-            const storedFiles = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
-            
-            if (files.length > 0) {
-                // Loop through each file and create a download button
-                for (let i = 0; i < files.length; i++) {
-                    const file = files[i];
-                    const fileURL = URL.createObjectURL(file);
-
-                    // Save the file name and URL in localStorage
-                    storedFiles.push({ name: file.name, url: fileURL });
-                    localStorage.setItem('uploadedFiles', JSON.stringify(storedFiles));
-
-                    createDownloadButton(file.name, fileURL);
-                }
-            }
-        });
-
-        // Function to create a download button dynamically for each file
-        function createDownloadButton(fileName, fileURL) {
+        // Function to create a download button for each file
+        function createDownloadButton(fileName, fileUrl) {
             const downloadButtonContainer = document.getElementById('downloadButtonContainer');
 
             // Create a download button
             const downloadButton = document.createElement('a');
-            downloadButton.href = fileURL;  // Set the URL of the file for download
+            downloadButton.href = fileUrl;  // Set the raw file URL for download
             downloadButton.download = fileName;  // Set the filename as the download name
             downloadButton.textContent = 'Download ' + fileName;  // Set button text to the file name
             downloadButton.style.display = 'inline-block';
@@ -63,6 +71,9 @@
             // Append the new download button to the container
             downloadButtonContainer.appendChild(downloadButton);
         }
+
+        // Call the fetchGitHubFiles function to load files from GitHub when the page loads
+        window.onload = fetchGitHubFiles;
     </script>
 </body>
 </html>
