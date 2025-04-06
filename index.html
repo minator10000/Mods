@@ -6,7 +6,7 @@
     <title>Multiple File Upload and Download</title>
 </head>
 <body>
-    <h2>download mods made by minator 1000</h2>
+    <h2>download modsby minator 1000</h2>
 
     <!-- File input to upload multiple files -->
     <input type="file" id="fileInput" multiple />
@@ -15,29 +15,43 @@
     <div id="downloadButtonContainer"></div>
 
     <script>
+        // Check if there are saved files in localStorage when the page loads
+        window.onload = function() {
+            const storedFiles = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+            storedFiles.forEach(file => {
+                createDownloadButton(file.name, file.url);
+            });
+        }
+
         // Function to handle file upload and create download buttons for each file
         document.getElementById('fileInput').addEventListener('change', function(event) {
             const files = event.target.files;  // Get the list of files selected by the user
+            const storedFiles = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+            
             if (files.length > 0) {
                 // Loop through each file and create a download button
                 for (let i = 0; i < files.length; i++) {
-                    createDownloadButton(files[i]);
+                    const file = files[i];
+                    const fileURL = URL.createObjectURL(file);
+
+                    // Save the file name and URL in localStorage
+                    storedFiles.push({ name: file.name, url: fileURL });
+                    localStorage.setItem('uploadedFiles', JSON.stringify(storedFiles));
+
+                    createDownloadButton(file.name, fileURL);
                 }
             }
         });
 
         // Function to create a download button dynamically for each file
-        function createDownloadButton(file) {
+        function createDownloadButton(fileName, fileURL) {
             const downloadButtonContainer = document.getElementById('downloadButtonContainer');
-            
-            // Create a URL object for the file (this allows download without uploading it to a server)
-            const fileURL = URL.createObjectURL(file);
 
             // Create a download button
             const downloadButton = document.createElement('a');
             downloadButton.href = fileURL;  // Set the URL of the file for download
-            downloadButton.download = file.name;  // Set the filename as the download name
-            downloadButton.textContent = 'Download ' + file.name;  // Set button text to the file name
+            downloadButton.download = fileName;  // Set the filename as the download name
+            downloadButton.textContent = 'Download ' + fileName;  // Set button text to the file name
             downloadButton.style.display = 'inline-block';
             downloadButton.style.marginTop = '10px';
             downloadButton.style.padding = '10px';
